@@ -16,18 +16,18 @@ public class StringCalculator {
 
         if (input.startsWith("//")) {
 
-            int NewlineIndex = input.indexOf('\n');
-            if (NewlineIndex < 0) {
+            int newlineIndex = input.indexOf('\n');
+            if (newlineIndex < 0) {
                 throw new IllegalArgumentException("잘못된 입력입니다: 커스텀 구분자 형식은 \"//<구분자>\\n<숫자들>\" 이어야 합니다.");
             }
 
-            String customDelimiter = input.substring(2, NewlineIndex);
+            String customDelimiter = input.substring(2, newlineIndex);
             if (customDelimiter.isEmpty()) {
                 throw new IllegalArgumentException("잘못된 입력입니다: 커스텀 구분자가 비어 있습니다.");
             }
 
             delimiter = java.util.regex.Pattern.quote(customDelimiter); //문자 그대로 인식하게 하는 안전장치
-            numbers = input.substring(NewlineIndex + 1);
+            numbers = input.substring(newlineIndex + 1);
             if (numbers.trim().isEmpty()) {
                 return 0;
             }
