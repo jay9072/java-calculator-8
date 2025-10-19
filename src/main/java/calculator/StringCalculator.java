@@ -7,11 +7,12 @@ public class StringCalculator {
             return 0;
         }
 
+
         String delimiter = "[,:]";
         String numbers = input;
 
         if (input.startsWith("//")) {
-            String[] parts = input.split("\n", 2);
+            String[] parts = input.split("\\n", 2);
 
             String customDelimiter = parts[0].substring(2);
             delimiter = java.util.regex.Pattern.quote(customDelimiter); //문자 그대로 인식하게 하는 안전장치
