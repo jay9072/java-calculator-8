@@ -15,16 +15,27 @@ public class StringCalculator {
         String numbers = input;
 
         if (input.startsWith("//")) {
-            String[] parts = input.split("\n", 2);
 
-            String customDelimiter = parts[0].substring(2);
+            int NewlineIndex = input.indexOf('\n');
+            if (NewlineIndex < 0){
+                throw new IllegalArgumentException("잘못된 입력입니다: 커스텀 구분자 형식은 \"//<구분자>\\n<숫자들>\" 이어야 합니다.");
+            }
+
+            String customDelimiter = input.substring(2,NewlineIndex);
+            if (customDelimiter.isEmpty()) {
+                throw new IllegalArgumentException("잘못된 입력입니다: 커스텀 구분자가 비어 있습니다.");
+            }
+
             delimiter = java.util.regex.Pattern.quote(customDelimiter); //문자 그대로 인식하게 하는 안전장치
-            numbers = parts[1];
+            numbers = input.substring(NewlineIndex + 1);
+            if (numbers.trim().isEmpty()){
+                return 0;
+            }
         }
 
         String[] tokens = numbers.split(delimiter);
-
         int sum =0;
+
         for (String number : tokens) {
             sum += Integer.parseInt(number);
         }
